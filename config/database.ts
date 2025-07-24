@@ -1,8 +1,6 @@
 // config/database.ts
 
-import { defineConfig } from 'strapi-typed';
-
-export default defineConfig(({ env }) => ({
+export default ({ env }) => ({
   connection: {
     client: 'postgres',
     connection: {
@@ -11,9 +9,9 @@ export default defineConfig(({ env }) => ({
       database: env('DATABASE_NAME'),
       user: env('DATABASE_USERNAME'),
       password: env('DATABASE_PASSWORD'),
-      ssl: {
+      ssl: env.bool('DATABASE_SSL', true) && {
         rejectUnauthorized: false,
       },
     },
   },
-}));
+});
